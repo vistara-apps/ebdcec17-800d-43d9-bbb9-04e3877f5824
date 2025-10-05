@@ -1,62 +1,46 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, Filter, TrendingUp, Clock, DollarSign } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Filter } from 'lucide-react';
+import { ProductCard } from '@/components/ProductCard';
+import { Product } from '@/lib/types';
 
 type ProductType = 'all' | 'micro-skill' | 'digital-product';
-
-const mockProducts = [
-  {
-    id: 1,
-    title: '15-Min Design Review',
-    type: 'micro-skill',
-    price: 15,
-    seller: 'designpro.eth',
-    sales: 47,
-    rating: 4.9,
-    image: '🎨',
-  },
-  {
-    id: 2,
-    title: 'Notion Template Pack',
-    type: 'digital-product',
-    price: 29,
-    seller: 'productivity.eth',
-    sales: 123,
-    rating: 5.0,
-    image: '📝',
-  },
-  {
-    id: 3,
-    title: 'Code Review Session',
-    type: 'micro-skill',
-    price: 25,
-    seller: 'codemaster.eth',
-    sales: 89,
-    rating: 4.8,
-    image: '💻',
-  },
-  {
-    id: 4,
-    title: 'Social Media Templates',
-    type: 'digital-product',
-    price: 19,
-    seller: 'socialguru.eth',
-    sales: 156,
-    rating: 4.9,
-    image: '📱',
-  },
-];
 
 export default function MarketplacePage() {
   const [filter, setFilter] = useState<ProductType>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredProducts = mockProducts.filter(product => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.products || []);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = products.filter(product => {
     const matchesFilter = filter === 'all' || product.type === filter;
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
+
+  const handlePurchase = (product: Product) => {
+    // In a real implementation, this would integrate with Coinbase Commerce
+    console.log('Purchasing product:', product);
+  };
 
   return (
     <div className="min-h-screen pt-24 pb-12 px-4">
@@ -112,45 +96,21 @@ export default function MarketplacePage() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="glass-card overflow-hidden group cursor-pointer">
-              <div className="aspect-video bg-surface flex items-center justify-center text-6xl group-hover:scale-105 transition-transform duration-200">
-                {product.image}
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">{product.title}</h3>
-                    <p className="text-sm text-text-muted">{product.seller}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-accent">${product.price}</div>
-                    <div className="text-xs text-text-muted">
-                      {product.type === 'micro-skill' ? 'per session' : 'one-time'}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                  <div className="flex items-center space-x-1">
-                    <span className="text-warning">⭐</span>
-                    <span className="text-sm font-medium">{product.rating}</span>
-                  </div>
-                  <div className="flex items-center space-x-1 text-sm text-text-muted">
-                    <TrendingUp className="w-4 h-4" />
-                    <span>{product.sales} sales</span>
-                  </div>
-                </div>
-
-                <button className="w-full mt-4 btn-primary">
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onPurchase={handlePurchase}
+              />
+            ))}
+          </div>
+        )}
 
         {filteredProducts.length === 0 && (
           <div className="glass-card p-12 text-center">
