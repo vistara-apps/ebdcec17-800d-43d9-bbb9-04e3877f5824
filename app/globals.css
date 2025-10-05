@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Jara Launch Theme - Professional Finance (Dark Navy + Gold) */
+  --color-bg: #0a1628;
+  --color-fg: #f8fafc;
+  --color-accent: #ffd700;
+  --color-primary: #3b82f6;
+  --color-surface: #1e293b;
+  --color-surface-hover: #334155;
+  --color-text-muted: #94a3b8;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+}
+
+@layer base {
+  * {
+    @apply border-gray-700;
+  }
+  
+  body {
+    @apply bg-bg text-fg antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface rounded-lg shadow-card;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+  }
+
+  .glass-card:hover {
+    @apply bg-surface-hover shadow-card-hover;
+    border-color: rgba(255, 215, 0, 0.2);
+  }
+
+  .btn-primary {
+    @apply bg-accent text-bg px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-all duration-200 shadow-button;
+  }
+
+  .btn-secondary {
+    @apply bg-surface text-fg px-6 py-3 rounded-lg font-medium hover:bg-surface-hover transition-all duration-200;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+
+  .btn-ghost {
+    @apply text-fg px-4 py-2 rounded-lg font-medium hover:bg-surface transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full bg-surface text-fg px-4 py-3 rounded-lg;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+  }
+
+  .input-field:focus {
+    @apply outline-none;
+    border-color: var(--color-accent);
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-success {
+    @apply bg-success bg-opacity-20 text-success;
+  }
+
+  .badge-warning {
+    @apply bg-warning bg-opacity-20 text-warning;
+  }
+
+  .badge-primary {
+    @apply bg-primary bg-opacity-20 text-primary;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+}
