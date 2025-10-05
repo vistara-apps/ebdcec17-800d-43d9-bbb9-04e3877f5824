@@ -1,0 +1,14 @@
+{
+  "name": "Jara Launch",
+  "description": "Jara Launch is a Base Mini App built with Zara.",
+  "image": "https://dummyimage.com/1200x628/0a0b0d/ffffff.png&text=OG",
+  "external_url": "https://ebdcec17-800d-43d9-bbb9-04e3877f5824.vercel.app",
+  "properties": {
+    "app": {
+      "name": "Jara Launch",
+      "description": "Jara Launch is a Base Mini App built with Zara.",
+      "url": "https://ebdcec17-800d-43d9-bbb9-04e3877f5824.vercel.app",
+      "icon": "https://0co.to/images/zara-2.png"
+    }
+  }
+}

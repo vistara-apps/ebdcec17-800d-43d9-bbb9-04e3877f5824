@@ -1,0 +1,30 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "Jara Launch",
+    "subtitle": "Built with Zara",
+    "description": "Jara Launch is a Base Mini App built with Zara.",
+    "iconUrl": "https://0co.to/images/zara-2.png",
+    "homeUrl": "https://ebdcec17800d43d9bbb904e3877f5824-u79w.vercel.app",
+    "splashImageUrl": "https://ebdcec17800d43d9bbb904e3877f5824-u79w.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "heroImageUrl": "https://ebdcec17800d43d9bbb904e3877f5824-u79w.vercel.app/image.png",
+    "tagline": "Jara Launch",
+    "screenshotUrls": [
+      "https://ebdcec17800d43d9bbb904e3877f5824-u79w.vercel.app/screenshot.png",
+      "https://ebdcec17800d43d9bbb904e3877f5824-u79w.vercel.app/screenshot.png"
+    ],
+    "primaryCategory": "social",
+    "tags": [
+      "base",
+      "miniapp",
+      "onchainkit"
+    ],
+    "webhookUrl": "https://ebdcec17800d43d9bbb904e3877f5824-u79w.vercel.app/api/webhook"
+  }
+}
