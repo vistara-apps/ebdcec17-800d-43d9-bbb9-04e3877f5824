@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Store, FileText, Timer, TrendingUp, Plus } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Store, FileText, Timer, TrendingUp, Plus, Rocket } from 'lucide-react';
 import Link from 'next/link';
+import { RevenueWidget } from '@/components/RevenueWidget';
+import { ProductCard } from '@/components/ProductCard';
+import { ValidatorCard } from '@/components/ValidatorCard';
 
 type PathType = 'micro-skill' | 'digital-product' | 'validator' | null;
 
@@ -48,43 +51,15 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="glass-card p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-text-muted text-sm">Total Revenue</span>
-              <TrendingUp className="w-4 h-4 text-success" />
-            </div>
-            <div className="text-3xl font-bold text-accent">$0</div>
-            <div className="text-xs text-text-muted mt-1">Start your first sale</div>
-          </div>
-
-          <div className="glass-card p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-text-muted text-sm">Active Products</span>
-              <Store className="w-4 h-4 text-primary" />
-            </div>
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-xs text-text-muted mt-1">Create your first product</div>
-          </div>
-
-          <div className="glass-card p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-text-muted text-sm">Total Sales</span>
-              <FileText className="w-4 h-4 text-success" />
-            </div>
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-xs text-text-muted mt-1">Waiting for first customer</div>
-          </div>
-
-          <div className="glass-card p-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-text-muted text-sm">Validators</span>
-              <Timer className="w-4 h-4 text-warning" />
-            </div>
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-xs text-text-muted mt-1">Test an idea in 48h</div>
-          </div>
+        {/* Revenue Dashboard */}
+        <div className="mb-12">
+          <RevenueWidget
+            totalRevenue={0}
+            monthlyRevenue={0}
+            totalSales={0}
+            nextMilestone={100}
+            variant="detailed"
+          />
         </div>
 
         {/* Path Selection */}
